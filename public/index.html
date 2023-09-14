@@ -22,9 +22,12 @@
             console.log('perdimos la contectado');
         });
 
-        socket.emit('mensaje', { nombre: 'Fernando'});
-        socket.on('mensaje', function ( payload ) { 
-            console.log('Escuchando:', payload);
+        socket.on('nuevo-mensaje', function ( payload ) { 
+            console.log('nuevo-mensaje:', payload);
+        });
+
+        socket.on('active-bands', function ( bands ) { 
+            console.table('nuevas bandas:', bands);
         });
 
     </script>

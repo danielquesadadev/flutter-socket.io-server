@@ -28,7 +28,24 @@ io.on('connection', client => {
     });
 
     client.on('emit-band', ( payload ) =>  {
+
         bands.voteBand(payload.id);
+        io.emit('active-bands',  bands.getBands());
+
+    });
+
+    // Escuchar add-band
+    client.on('add-band', ( payload ) =>  {
+
+        const bandaNueva = new Band( payload.name );
+        bands.addBand(bandaNueva);
+        io.emit('active-bands',  bands.getBands());
+
+    });
+
+    client.on('delete-band', ( payload ) =>  {
+
+        bands.deleteBand(payload.id);
         io.emit('active-bands',  bands.getBands());
 
     });
